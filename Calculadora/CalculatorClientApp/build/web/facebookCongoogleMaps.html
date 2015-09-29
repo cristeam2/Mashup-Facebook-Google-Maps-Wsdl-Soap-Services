@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+
+            <title>Practica 2 SC</title>
+
+            <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+
+            <!-- Latest compiled and minified CSS -->
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+            <!-- Optional theme -->
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+            <style type="text/css">
+                html, body {
+                    height: 100%;
+
+                    margin: 0;
+                    padding: 0;
+                }
+                #map {
+                    height: 100%;
+
+                }
+                body {
+                    margin: 100px auto;
+                    text-align: center;
+                    width: 1000px;
+                }
+
+                h1 {
+                    margin-bottom: 30px;
+                }
+
+                strong, img {
+                    display: block;
+                }
+                img {
+                    margin: 0 auto;
+                    border-radius: 10px;
+                }
+                #logout {
+                    margin-top: 10px;
+                }
+
+
+
+            </style>
+        </head>
+
+        <body>
+            <h1>Practica 2 sc </h1>
+
+            <h2>Facebook SDK  HTML / Javascript</h2>
+
+            <a href="#" id="login" class="btn btn-primary">Iniciar sesion</a>
+            <script>
+                // Load the SDK asynchronously
+                (function (d, s, id) {
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if (d.getElementById(id))
+                        return;
+                    js = d.createElement(s);
+                    js.id = id;
+                    js.src = "//connect.facebook.net/en_US/sdk.js";
+                    fjs.parentNode.insertBefore(js, fjs);
+                }(document, 'script', 'facebook-jssdk'));
+            </script>
+
+            <br></br>	
+            <button  id="datos">Dame mis Datos via API facebook</button>
+            <br></br>
+            <a href="#" id="publicaFijo" class="btn btn-primary">Publicar en mi muro</a>
+            <br></br>
+            <a href="https://www.facebook.com/cristeam2"  class="btn btn-primary">Ir a mi muro</a>
+
+
+            <br></br>
+
+            <input id="submit" type="button"  value="Buscar ciudad en google maps con la respuesta de la api de facebook">
+            <br></br>
+            <div id="map"></div>
+            <script>
+
+
+
+                $(function () {
+
+                    var app_id = '1484115481899871';
+                    var scopes = 'email, public_profile, user_friends,user_location,user_hometown';
+
+                    var btn_login = '<a href="#" id="login" class="btn btn-primary">Iniciar sesion</a>';
+
+
+                    var div_session = "<div id='facebook-session'>" +
+                            "<strong></strong>" +
+                            "<img>" +
+                            "<a href='#' id='logout' class='btn btn-danger'>Cerrar sesion</a>" +
+                            "</div>";
+
+                    window.fbAsyncInit = function () {
+
+                        FB.init({
+                            appId: app_id,
+                            status: true,
+                            cookie: true,
+                            xfbml: true,
+                            version: 'v2.1'
+                        });
+
+
+                        FB.getLoginStatus(function (response) {
+                            statusChangeCallback(response, function () {
+                            });
+                        });
+                    };
+
+                    var statusChangeCallback = function (response, callback) {
+
+
+                        if (response.status === 'connected') {
+                            getFacebookData();
+                        } else {
+                            callback(false);
+                        }
+                    }
+
+
+                    var checkLoginState = function (callback) {
+                        FB.getLoginStatus(function (response) {
+                            callback(response);
+                        });
+                    }
+
+                    var getFacebookData = function () {
+                        FB.api('/me', function (response) {
+
+                            $('#login').after(div_session);
+                            $('#login').remove();
+                            $('#facebook-session strong').text("Bienvenido: " + response.name);
+                            $('#facebook-session img').attr('src', 'http://graph.facebook.com/' + response.id + '/picture?type=large');
+                            //console.log(response);
+
+                            //console.log(response.hometown.name);
+                            //console.log(response.location.name);
+                        });
+
+                    }
+
+                    var facebookLogin = function () {
+                        checkLoginState(function (data) {
+                            if (data.status !== 'connected') {
+                                FB.login(function (response) {
+                                    if (response.status === 'connected')
+                                        getFacebookData();
+                                }, {scope: scopes});
+                            }
+                        })
+                    }
+
+                    var facebookLogout = function () {
+                        checkLoginState(function (data) {
+                            if (data.status === 'connected') {
+                                FB.logout(function (response) {
+                                    $('#facebook-session').before(btn_login);
+                                    $('#facebook-session').remove();
+                                })
+                            }
+                        })
+
+                    }
+
+                    $(document).on('click', '#publicaFijo', function (e) {
+                        FB.login(function () {
+
+                            // Note: The call will only work if you accept the permission request
+                            FB.api('/me/feed', 'post', {
+                                message: window.ciudad
+                                        //message: 'message'
+                            });
+                        }, {scope: 'publish_actions'});
+                    })
+
+
+
+
+
+                    document.getElementById('datos').onclick = function () {
+                        FB.api('/me', {locale: 'en_US', fields: 'name, email,friends,location,locale,hometown'},
+                        function (response) {
+                            //console.log(response);
+                            console.log("Nombre y apellido: " + response['name']);
+                            mensaje = "Nombre y apellido: " + response['name'] + "\r";
+
+                            console.log("Email: " + response['email']);
+                            mensaje += ("Email: " + response['email']) + "\r";
+
+                            window.ciudad = response['location']['name'].split(',')[0];
+                            mensaje += "Ciudad: " + ciudad + "\n";
+
+                            var pais = response['location']['name'].split(',')[1]
+                            mensaje += "Pais: " + pais;
+
+                            console.log("Ciudad: " + ciudad);
+                            console.log("Pais: " + pais + "\n");
+
+
+
+                            $.ajax({
+                                url: "http://maps.googleapis.com/maps/api/geocode/json?address=" + ciudad + "&sensor=false",
+                                type: "POST",
+                                success: function (res) {
+                                    latitud = res.results[0].geometry.location.lat;
+                                    longuitud = res.results[0].geometry.location.lng;
+                                    console.log("latitud: " + window.latitud);
+                                    console.log("longuitud: " + window.longuitud);
+
+                                    window.mensaje += "\nlatitud: " + latitud;
+                                    window.mensaje += "\nlonguitud: " + longuitud;
+                                    alert(window.mensaje);
+
+                                }
+                            });
+
+                            /* geocoder = new google.maps.Geocoder();
+                             geocoder.geocode({
+                             'address': ciudad
+                             }, function(results, status) {      
+                             console.log(results[0].geometry.location.lat().toString());    
+                             console.log( results[0].geometry.location.lng().toString());       
+                             window.mensaje += "\nlatitud: "+ results[0].geometry.location.lat().toString();
+                             window.mensaje += "\nlonguitud: "+ results[0].geometry.location.lng().toString();
+                             });*/
+
+
+          //                    alert(window.mensaje);
+
+
+                        }
+                        );
+                    };
+                    // Note: The call will only work if you accept the permission request
+
+                    $(document).on('click', '#login', function (e) {
+
+                        e.preventDefault();
+
+                        facebookLogin();
+                    })
+
+                    $(document).on('click', '#logout', function (e) {
+                        e.preventDefault();
+
+                        if (confirm("¿Está seguro?"))
+                            facebookLogout();
+                        else
+                            return false;
+                    })
+
+                })
+
+
+                function initMap() {
+                    var map = new google.maps.Map(document.getElementById('map'), {
+                        zoom: 3,
+                        center: {lat: 20, lng: -30}
+                    });
+                    var geocoder = new google.maps.Geocoder();
+
+                    document.getElementById('submit').addEventListener('click', function () {
+
+                        geocodeAddress(geocoder, map);
+                    });
+
+                }
+
+                function  latlong(address) {
+                    geocoder = new google.maps.Geocoder();
+                    geocoder.geocode({
+                        'address': address
+                    }, function (results, status) {
+                        window.latitudgoogle = results[0].geometry.location.lat();
+                        window.longuitudgoogle = results[0].geometry.location.lng();
+                        //console.log(respuesta);
+
+                    });
+                }
+
+                function geocodeAddress(geocoder, resultsMap) {
+                    var address = window.ciudad;
+                    alert(window.ciudad);
+
+
+
+
+                    //document.getElementById('address').value;
+                    geocoder.geocode({'address': address}, function (results, status) {
+
+
+
+
+                        if (status === google.maps.GeocoderStatus.OK) {
+                            resultsMap.setCenter(results[0].geometry.location);
+                            var marker = new google.maps.Marker({
+                                map: resultsMap,
+                                position: results[0].geometry.location
+
+                            });
+                            var cityCircle = new google.maps.Circle({
+                                strokeColor: '#FF0000',
+                                strokeOpacity: 0.8,
+                                strokeWeight: 2,
+                                fillColor: '#FF0000',
+                                fillOpacity: 0.35,
+                                map: resultsMap,
+                                center: {lat: 40.4167754, lng: -3.7037902},
+                                radius: 100000
+                            });
+                        } else {
+                            alert('Geocode was not successful for the following reason: ' + status);
+                        }
+                    });
+                }
+
+
+            </script>
+            <script src="https://maps.googleapis.com/maps/api/js?signed_in=true&callback=initMap"
+            async defer></script>
+
+        </body>
+    </html>

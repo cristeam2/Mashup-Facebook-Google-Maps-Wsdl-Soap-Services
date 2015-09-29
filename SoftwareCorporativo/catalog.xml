@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://www.webservicex.net/sendsmsworld.asmx?WSDL" uri="src/conf/xml-resources/web-service-references/sendsmsworld_1/wsdl/www.webservicex.net/sendsmsworld.asmx.wsdl"/>
+    <system systemId="http://www.webservicex.net/globalweather.asmx?wsdl" uri="src/conf/xml-resources/web-service-references/globalweather_3/wsdl/www.webservicex.net/globalweather.asmx.wsdl"/>
+    <system systemId="http://www.webservicex.net/geoipservice.asmx?WSDL" uri="src/conf/xml-resources/web-service-references/geoipservice/wsdl/www.webservicex.net/geoipservice.asmx.wsdl"/>
+    <system systemId="http://www.webservicex.net/TranslateService.asmx?WSDL" uri="src/conf/xml-resources/web-service-references/TranslateService_2/wsdl/www.webservicex.net/TranslateService.asmx.wsdl"/>
+</catalog>

@@ -1,0 +1,94 @@
+
+body {
+    background-color: #b0c4de;
+
+}
+
+.login {
+    padding: 40px;
+    width: 500px;
+    background-color: #F7F7F7;
+    margin: 0 auto 1px;
+    border-radius: 20px;
+    box-shadow: 4px 2px 2px rgb(0, 0, 0);
+    overflow: hidden;
+}
+
+.login h1 {
+    font-weight: 100;
+    text-align: center;
+    font-size: 2.3em;
+}
+
+.login input[type=submit],input[type=button] {
+    width: 180px;
+    margin-left:auto;
+    margin-right:auto;
+    display:block;
+
+
+}
+
+.login input[type=text], input[type=password]  {
+    height: 44px;
+    font-size: 16px;
+    width: 100%;
+    margin-bottom: 10px;
+    background: #fff;
+    border: 1px solid #d9d9d9;
+    border-top: 1px solid #c0c0c0;
+    padding: 0 8px;
+}
+
+.login input[type=text]:hover, input[type=password]:hover  {
+    border: 1px solid #b9b9b9;
+    border-top: 1px solid #a0a0a0;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+}
+
+
+
+.login-submit {
+    border: 11px;
+    color: #fff;
+    text-shadow: 0 1px rgba(0,0,0,0.1); 
+    background-color: #4d90fe;
+}
+
+.login-submit:hover {
+    border: 0px;
+    text-shadow: 0 1px rgba(0,0,0,0.3);
+    background-color: #357ae8;
+}
+
+.login-button {
+    border: 11px;
+    color: #fff;
+    text-shadow: 0 1px rgba(0,0,0,0.1); 
+    background-color: #4d90fe;
+}
+
+.login-button:hover {
+    border: 0px;
+    text-shadow: 0 1px rgba(0,0,0,0.3);
+    background-color: #357ae8;
+}
+
+.login a {
+    text-decoration: none;
+    color: #246;
+    font-weight: 400;
+    text-align: center;
+    display: inline-block;
+    opacity: 0.6;
+}
+
+.login-help h2 {
+    text-align: center;
+    color:  rgb(255,0,0);
+}
+
+.login a:hover {
+    opacity: 2;
+}
+

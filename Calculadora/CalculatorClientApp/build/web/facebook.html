@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<title>Practica 2 SC</title>
+
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="main.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="main.css">
+
+</head>
+
+<body>
+<h1>Facebook SDK login con Javascript</h1>
+
+	<a href="#" id="login" class="btn btn-primary">Iniciar sesion</a>
+	<script>
+	// Load the SDK asynchronously
+	  (function(d, s, id) {
+	    var js, fjs = d.getElementsByTagName(s)[0];
+	    if (d.getElementById(id)) return;
+	    js = d.createElement(s); js.id = id;
+	    js.src = "//connect.facebook.net/en_US/sdk.js";
+	    fjs.parentNode.insertBefore(js, fjs);
+	  }(document, 'script', 'facebook-jssdk'));
+	 </script>
+
+<h1>Practica 2 sc </h1>
+	
+	<a href="#" id="publicaPreguntando" class="btn btn-primary">publicaPreguntando</a>
+	<a href="#" id="publicaFijo" class="btn btn-primary">publicaFijo</a>
+
+<div
+  class="fb-like"
+  data-share="true"
+  data-width="450"
+  data-show-faces="true">
+</div>
+<fb:login-button show-faces="false" width="200" max-rows="1"     scope="email,user_birthday,user_location,user_hometown" onclick="testAPI();" onlogin="Log.info('onlogin callback')">
+     Sign Up with Facebook
+    </fb:login-button>
+    <button id="email">Muestra email</button>
+
+<script>
+
+
+
+</script>
+</body>
+</html>

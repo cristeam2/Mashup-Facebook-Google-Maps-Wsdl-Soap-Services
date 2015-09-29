@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Geolocation con Gmaps API y servicio WSDL</title>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+
+        <style>
+            html, body {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                 background-color: #b0c4de;
+                 text-align: center;
+            }
+            #map {
+                height: 100%;
+            }
+            h3 {
+    padding: 8px;
+    width: 220px;
+    background-color: #F7F7F7;
+    margin: 0 auto 1px;
+    border-radius: 10px;
+    box-shadow: 4px 2px 2px rgb(0, 0, 0);
+    overflow: hidden;
+}
+            
+        </style>
+    </head>
+    <body >
+        <h3> <a href="#" id="login" class="btn btn-primary">Publicar en mi muro</a> 
+</h3>
+        </br><h3>
+        <a href="https://www.facebook.com/cristeam2">Ir a mi muro</a>
+
+</h3>
+        <script>
+            // Load the SDK asynchronously
+            (function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id))
+                    return;
+                js = d.createElement(s);
+                js.id = id;
+                js.src = "//connect.facebook.net/en_US/sdk.js";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+        </script>
+
+        <div  id="map"></div>
+
+        <script>
+
+
+            function initialize() {
+                geocoder = new google.maps.Geocoder();
+            }
+
+            function initMap() {
+                geocoder = new google.maps.Geocoder();
+
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    center: {lat: 0, lng: 10},
+                    zoom: 6
+                });
+                var infoWindow = new google.maps.InfoWindow({map: map});
+
+                // Try HTML5 geolocation.
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function (position) {
+                        var pos = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude,
+                        };
+
+
+                        infoWindow.setPosition(pos);
+
+                        var latlng = new google.maps.LatLng(pos['lat'], pos['lng']);
+
+                        geocoder.geocode({'latLng': latlng}, function (results, status) {
+
+                            var ciudad = results[2].formatted_address.split(',')[0];
+                            var pais = (results[8].formatted_address);
+
+
+                            $.get('ServletWeather', {"city": ciudad, "country": ""}, function (responseText) {
+                                infoWindow.setContent('Ubicacion con gps encontrada:</br>' + "Ciudad: " + ciudad + "</br>" + "Pais: " + pais + "</br> Latitud: " + pos["lat"] + "</br>Longitud: " + pos["lng"] + "</br>" + responseText);
+                                window.mensaje = ("Ubicacion con GPS encontrada:\n" + "Ciudad: " + ciudad + "\n" + "Pais: " + pais + "\n Latitud: " + pos["lat"] + "\nLongitud: " + pos["lng"] + "\n" + responseText);
+                            })
+                            console.log("ciudad=" + ciudad);
+                            console.log("pais=" + pais);
+
+                        });
+
+                        console.log("lat=" + pos["lat"]);
+                        console.log("long=" + pos["lng"]);
+
+                        map.setCenter(pos);
+
+
+
+                    }, function () {
+                        handleLocationError(true, infoWindow, map.getCenter());
+                    });
+                } else {
+                    // Browser doesn't support Geolocation
+                    handleLocationError(false, infoWindow, map.getCenter());
+                }
+            }
+
+            function  codeLatLng(lat, lng) {
+
+                var latlng = new google.maps.LatLng(lat, lng);
+                geocoder.geocode({'latLng': latlng}, function (results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+
+                        console.log("ciudad=" + results[2].formatted_address.split(',')[0]);
+                        console.log("pais=" + results[8].formatted_address);
+                        if (results[1]) {
+                            //formatted address
+                            //console.log(results[0].formatted_address);
+
+                            //find country name
+                            for (var i = 0; i < results[0].address_components.length; i++) {
+                                for (var b = 0; b < results[0].address_components[i].types.length; b++) {
+
+                                    //there are different types that might hold a city admin_area_lvl_1 usually does in come cases looking for sublocality type will be more appropriate
+                                    if (results[0].address_components[i].types[b] == "administrative_area_level_1") {
+                                        //this is the object you are looking for
+                                        city = results[0].address_components[i];
+                                        break;
+                                    }
+                                }
+                            }
+                            //city data
+                            //alert(city.short_name + " " + city.long_name)
+                            //console.log(city.short_name+ " " + city.long_name);
+
+                        } else {
+                            alert("No results found");
+                        }
+                    } else {
+                        alert("Geocoder failed due to: " + status);
+                    }
+                });
+
+            }
+            function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+                infoWindow.setPosition(pos);
+                infoWindow.setContent(browserHasGeolocation ?
+                        'Error: The Geolocation service failed.' :
+                        'Error: Your browser doesn\'t support geolocation.');
+            }
+
+        </script>
+        <script src="https://maps.googleapis.com/maps/api/js?signed_in=true&callback=initMap"
+                async defer>
+        </script>
+        <script>
+            $(function () {
+
+                (function (d, s, id) {
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if (d.getElementById(id))
+                        return;
+                    js = d.createElement(s);
+                    js.id = id;
+                    js.src = "//connect.facebook.net/en_US/sdk.js";
+                    fjs.parentNode.insertBefore(js, fjs);
+                }(document, 'script', 'facebook-jssdk'));
+
+                var app_id = '1484115481899871';
+                var scopes = 'email, public_profile, user_friends,user_location,user_hometown';
+
+                var btn_login = '<a href="#" id="login" class="btn btn-primary">Iniciar sesion</a>';
+
+
+                var div_session = "<div id='facebook-session'>" +
+                        "<strong></strong>" +
+                        "<img>" +
+                        "<a href='#' id='logout' class='btn btn-danger'>Cerrar sesion</a>" +
+                        "</div>";
+
+                window.fbAsyncInit = function () {
+
+                    FB.init({
+                        appId: app_id,
+                        status: true,
+                        cookie: true,
+                        xfbml: true,
+                        version: 'v2.1'
+                    });
+
+
+                    FB.getLoginStatus(function (response) {
+                        statusChangeCallback(response, function () {
+                        });
+                    });
+                };
+
+
+                var facebookLogin = function () {
+                    checkLoginState(function (data) {
+                        if (data.status !== 'connected') {
+                            FB.login(function (response) {
+                                console.log(response.status);
+                                if (response.status === 'connected')
+                                    getFacebookData();
+                            }, {scope: scopes});
+                        }
+                    })
+                }
+
+                var statusChangeCallback = function (response, callback) {
+
+
+                    if (response.status === 'connected') {
+                        getFacebookData();
+                    } else {
+
+                        callback(false);
+                    }
+                }
+
+
+                var checkLoginState = function (callback) {
+                    FB.getLoginStatus(function (response) {
+                        callback(response);
+                    });
+                }
+
+                var getFacebookData = function () {
+                    FB.api('/me', function (response) {
+
+                        $('#login').after(div_session);
+                        $('#login').remove();
+                        $('#facebook-session strong').text("Bienvenido: " + response.name);
+                        $('#facebook-session img').attr('src', 'http://graph.facebook.com/' + response.id + '/picture?type=large');
+                        console.log(response);
+
+                        console.log(response.hometown.name);
+                        console.log(response.location.name);
+                    });
+
+                }
+                var facebookLogout = function () {
+                    checkLoginState(function (data) {
+                        if (data.status === 'connected') {
+                            FB.logout(function (response) {
+                                $('#facebook-session').before(btn_login);
+                                $('#facebook-session').remove();
+                            })
+                        }
+                    })
+
+                }
+
+                $(document).on('click', '#login2', function (e) {
+                    e.preventDefault();
+
+                    facebookLogin();
+
+                })
+                $(document).on('click', '#login', function (e) {
+                    FB.login(function () {
+
+                        // Note: The call will only work if you accept the permission request
+                        FB.api('/me/feed', 'post', {
+                            message: window.mensaje
+                        });
+                    }, {scope: 'publish_actions'});
+                })
+
+            })
+        </script>
+    </body>
+</html>

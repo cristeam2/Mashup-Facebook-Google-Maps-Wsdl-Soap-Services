@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+        *** GENERATED FROM jax-ws.xml - DO NOT EDIT !                             ***
+        *** TO MODIFY wsimport options USE Web Service node -> Edit WS Attributes ***
+        *** TO CHANGE TARGETS GENERATED TO jaxws-build.xml COPY THOSE             ***
+        *** TARGETS TO ../build.xml AND MODIFY THAT FILE INSTEAD                  ***
+
+        --><project xmlns:xalan="http://xml.apache.org/xslt" xmlns:webproject2="http://www.netbeans.org/ns/web-project/2" xmlns:jaxws="http://www.netbeans.org/ns/jax-ws/1">
+    <!--
+                ===================
+                JAX-WS WSGEN SECTION
+                ===================
+            -->
+    <!--
+                ===================
+                JAX-WS WSIMPORT SECTION
+                ===================
+            -->
+    <target name="wsimport-init" depends="init">
+        <fail if="${wsimport.bad.version}" message="WsImport ant task defined in the classpath ${j2ee.platform.wsimport.classpath} has a serious bug. See http://wiki.netbeans.org/MetroIssue for details."/>
+        <mkdir dir="${build.generated.sources.dir}/jax-ws"/>
+        <property name="j2ee.platform.wsimport.classpath" value="${libs.jaxws21.classpath}"/>
+        <taskdef name="wsimport" classname="com.sun.tools.ws.ant.WsImport">
+            <classpath path="${java.home}/../lib/tools.jar:${j2ee.platform.wsimport.classpath}:${javac.classpath}"/>
+        </taskdef>
+        <condition property="conf-dir" value="${conf.dir}/" else="">
+            <isset property="conf.dir"/>
+        </condition>
+    </target>
+    <target name="wsimport-client-globalweather" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/globalweather"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/globalweather" destdir="${build.generated.dir}/jax-wsCache/globalweather" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/globalweather/wsdl/www.webservicex.net/globalweather.asmx.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://www.webservicex.net/globalweather.asmx?wsdl" xnocompile="true" xendorsed="true">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/globalweather/wsdl/www.webservicex.net/globalweather.asmx.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/globalweather"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/globalweather">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-globalweather" depends="-init-project">
+        <delete dir="${build.generated.sources.dir}/jax-ws/net/webservicex"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/globalweather"/>
+    </target>
+    <target name="wsimport-client-sendsmsworld" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/sendsmsworld"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/sendsmsworld" destdir="${build.generated.dir}/jax-wsCache/sendsmsworld" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/sendsmsworld/wsdl/www.webservicex.net/sendsmsworld.asmx.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://www.webservicex.net/sendsmsworld.asmx?WSDL" xnocompile="true" xendorsed="true">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/sendsmsworld/wsdl/www.webservicex.net/sendsmsworld.asmx.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/sendsmsworld"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/sendsmsworld">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-sendsmsworld" depends="-init-project">
+        <delete dir="${build.generated.sources.dir}/jax-ws/net/webservicex"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/sendsmsworld"/>
+    </target>
+    <target name="wsimport-client-TranslateService" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/TranslateService"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/TranslateService" destdir="${build.generated.dir}/jax-wsCache/TranslateService" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/TranslateService/wsdl/www.webservicex.net/TranslateService.asmx.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://www.webservicex.net/TranslateService.asmx?WSDL" xnocompile="true" xendorsed="true">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/TranslateService/wsdl/www.webservicex.net/TranslateService.asmx.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/TranslateService"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/TranslateService">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-TranslateService" depends="-init-project">
+        <delete dir="${build.generated.sources.dir}/jax-ws/net/webservicex"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/TranslateService"/>
+    </target>
+    <target name="wsimport-client-sendsmsworld_1" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/sendsmsworld_1"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/sendsmsworld_1" destdir="${build.generated.dir}/jax-wsCache/sendsmsworld_1" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/sendsmsworld_1/wsdl/www.webservicex.net/sendsmsworld.asmx.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://www.webservicex.net/sendsmsworld.asmx?WSDL" xnocompile="true" xendorsed="true">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/sendsmsworld_1/wsdl/www.webservicex.net/sendsmsworld.asmx.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/sendsmsworld_1"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/sendsmsworld_1">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-sendsmsworld_1" depends="-init-project">
+        <delete dir="${build.generated.sources.dir}/jax-ws/net/webservicex"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/sendsmsworld_1"/>
+    </target>
+    <target name="wsimport-client-globalweather_1" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/globalweather_1"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/globalweather_1" destdir="${build.generated.dir}/jax-wsCache/globalweather_1" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/globalweather_1/wsdl/www.webservicex.net/globalweather.asmx.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://www.webservicex.net/globalweather.asmx?wsdl" xnocompile="true" xendorsed="true">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/globalweather_1/wsdl/www.webservicex.net/globalweather.asmx.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/globalweather_1"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/globalweather_1">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-globalweather_1" depends="-init-project">
+        <delete dir="${build.generated.sources.dir}/jax-ws/net/webservicex"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/globalweather_1"/>
+    </target>
+    <target name="wsimport-client-globalweather_2" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/globalweather_2"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/globalweather_2" destdir="${build.generated.dir}/jax-wsCache/globalweather_2" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/globalweather_2/wsdl/www.webservicex.net/globalweather.asmx.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://www.webservicex.net/globalweather.asmx?wsdl" xnocompile="true" xendorsed="true">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/globalweather_2/wsdl/www.webservicex.net/globalweather.asmx.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/globalweather_2"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/globalweather_2">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-globalweather_2" depends="-init-project">
+        <delete dir="${build.generated.sources.dir}/jax-ws/net/webservicex"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/globalweather_2"/>
+    </target>
+    <target name="wsimport-client-TranslateService_1" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/TranslateService_1"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/TranslateService_1" destdir="${build.generated.dir}/jax-wsCache/TranslateService_1" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/TranslateService_1/wsdl/www.webservicex.net/TranslateService.asmx.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://www.webservicex.net/TranslateService.asmx?WSDL" xnocompile="true" xendorsed="true">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/TranslateService_1/wsdl/www.webservicex.net/TranslateService.asmx.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/TranslateService_1"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/TranslateService_1">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-TranslateService_1" depends="-init-project">
+        <delete dir="${build.generated.sources.dir}/jax-ws/net/webservicex"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/TranslateService_1"/>
+    </target>
+    <target name="wsimport-client-globalweather_3" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/globalweather_3"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/globalweather_3" destdir="${build.generated.dir}/jax-wsCache/globalweather_3" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/globalweather_3/wsdl/www.webservicex.net/globalweather.asmx.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://www.webservicex.net/globalweather.asmx?wsdl" xnocompile="true" xendorsed="true">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/globalweather_3/wsdl/www.webservicex.net/globalweather.asmx.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/globalweather_3"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/globalweather_3">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-globalweather_3" depends="-init-project">
+        <delete dir="${build.generated.sources.dir}/jax-ws/net/webservicex"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/globalweather_3"/>
+    </target>
+    <target name="wsimport-client-geoipservice" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/geoipservice"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/geoipservice" destdir="${build.generated.dir}/jax-wsCache/geoipservice" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/geoipservice/wsdl/www.webservicex.net/geoipservice.asmx.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://www.webservicex.net/geoipservice.asmx?WSDL" xnocompile="true" xendorsed="true">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/geoipservice/wsdl/www.webservicex.net/geoipservice.asmx.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/geoipservice"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/geoipservice">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-geoipservice" depends="-init-project">
+        <delete dir="${build.generated.sources.dir}/jax-ws/net/webservicex"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/geoipservice"/>
+    </target>
+    <target name="wsimport-client-TranslateService_2" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/TranslateService_2"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/TranslateService_2" destdir="${build.generated.dir}/jax-wsCache/TranslateService_2" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/TranslateService_2/wsdl/www.webservicex.net/TranslateService.asmx.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://www.webservicex.net/TranslateService.asmx?WSDL" xnocompile="true" xendorsed="true">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/TranslateService_2/wsdl/www.webservicex.net/TranslateService.asmx.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/TranslateService_2"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/TranslateService_2">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-TranslateService_2" depends="-init-project">
+        <delete dir="${build.generated.sources.dir}/jax-ws/net/webservicex"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/TranslateService_2"/>
+    </target>
+    <target name="wsimport-client-generate" depends="wsimport-client-globalweather, wsimport-client-sendsmsworld, wsimport-client-TranslateService, wsimport-client-sendsmsworld_1, wsimport-client-globalweather_1, wsimport-client-globalweather_2, wsimport-client-TranslateService_1, wsimport-client-globalweather_3, wsimport-client-geoipservice, wsimport-client-TranslateService_2"/>
+</project>
